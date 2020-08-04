@@ -40,22 +40,7 @@
 </head>
 
 <body>
-    <?php
-    $db = mysqli_connect('localhost:3308', 'root', '', 'feedback');
-    $sql="SELECT*FROM feedback;";
-    $result = mysqli_query($db,$sql);
-    $check= mysqli_num_rows($result);
-    $noti=mysqli_query($db, "SELECT* FROM feedback ORDER BY id DESC LIMIT 1 ");
-    $printnoti= mysqli_fetch_row($noti);
-    
 
-        if ($row = mysqli_fetch_assoc($result)){
-            
-            echo "<br>" ."Welcome our new user:". $printnoti[1]; 
-        }
-    
-    
-    ?>
 
   <!-- ======= Top Bar ======= -->
   <div id="topbar" class="d-flex align-items-center fixed-top">
@@ -566,12 +551,21 @@ echo "hello world";
     $result = mysqli_query($db,$sql);
     $check= mysqli_num_rows($result);
     $noti=mysqli_query($db, "SELECT* FROM feedback ORDER BY id DESC LIMIT 1 ");
+
+    $noti1=mysqli_query($db, "SELECT* FROM feedback where email like '%gmail%' ");
     $printnoti= mysqli_fetch_row($noti);
+
+    echo "The following users are eligible for our $3 off per order "."<br>";
+    while ($row = mysqli_fetch_array ($noti1)){
+    echo $row['name']."<br>";
+    
+    }
     
 
         if ($row = mysqli_fetch_assoc($result)){
             
-            echo "<br>" ."Welcome our new user:". $printnoti[1]; 
+            echo "<br>"."New order made by:". $printnoti[2]."<br>" ; 
+            echo "\r\n Thank you for dinning at home and keep everyone safe!";
         }
     
     
